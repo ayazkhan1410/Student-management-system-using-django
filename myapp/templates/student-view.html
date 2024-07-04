@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>{{ student_view.student_name }}</title>
+{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    {% if messages %}
+    <div class="alert alert-warning">
+        {% for message in messages %}
+            {{ message }}
+        {% endfor %}
+    </div>
+    {% endif %}
+<div class="container mt-5">
+    <div class="card shadow-lg">
+        <div class="card-header">
+            <h2>{{ student_view.student_name }}</h2>
+        </div>
+        <div class="card-body">
+            <div class="row mb-3">
+                <div class="col-md-4">
+                    <img src="{{ student_view.student_image.url }}" alt="{{ student_view.student_name }}" class="img-fluid rounded shadow-sm">
+                </div>
+                <div class="col-md-8">
+                    <h4 class="mb-3">Details</h4>
+                    <p><strong>Age:</strong> {{ student_view.student_age }}</p>
+                    <p><strong>Class:</strong> {{ student_view.student_class }}</p>
+                    <p><strong>Section:</strong> {{ student_view.student_section }}</p>
+                    <p><strong>Roll Number:</strong> {{ student_view.roll_number.roll_number }}</p>
+                </div>
+            </div>
+            <div class="d-flex justify-content-end">
+                <a href="{% url 'update-student' student_view.slug %}" class="btn btn-primary me-2">Edit</a>
+                <a href="{% url 'delete-student' student_view.slug %}" class="btn btn-danger">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
